@@ -1,6 +1,8 @@
-import SwiftUI
+import UIKit
 class PostViewController: UIViewController {
+
     var getPost: Post?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemYellow
@@ -12,6 +14,7 @@ class PostViewController: UIViewController {
         let rightButton : UIBarButtonItem = UIBarButtonItem(title: "Info", style: UIBarButtonItem.Style.plain, target: self, action: #selector(openInfo))
         self.navigationItem.rightBarButtonItem = rightButton
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let messageLabel = UILabel()
@@ -19,6 +22,7 @@ class PostViewController: UIViewController {
         messageLabel.text = getPost?.message
         view.addSubview(messageLabel)
     }
+    
     @objc func openInfo(){
         let infoViewController = InfoViewController()
         present(infoViewController, animated: true)

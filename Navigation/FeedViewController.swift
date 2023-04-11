@@ -1,11 +1,13 @@
-import SwiftUI
+import UIKit
 
 class FeedViewController: UIViewController{
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
         title = "Feed"
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let btShowPost = UIButton(type: .system)
@@ -17,8 +19,8 @@ class FeedViewController: UIViewController{
         btShowPost.tintColor = .black
         btShowPost.addTarget(self, action: #selector(showPost), for: .touchUpInside)
         view.addSubview(btShowPost)
-
     }
+
     @objc func showPost(){
         let postViewController = PostViewController()
         postViewController.getPost = Post(title: "Hello", message: "It's test text")

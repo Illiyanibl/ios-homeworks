@@ -19,11 +19,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabMainViewController = UITabBarController()
         tabMainViewController.tabBar.tintColor = .systemYellow
         tabMainViewController.tabBar.unselectedItemTintColor = .darkGray
+
         let profileViewController = ProfileViewController()
         let feedViwController = FeedViewController()
-
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
-
         let feedNavigationController = UINavigationController(rootViewController: feedViwController)
         feedNavigationController.title = "Feed"
         feedNavigationController.view.backgroundColor = .darkGray
@@ -39,7 +38,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = tabMainViewController
         self.window = window
         window.makeKeyAndVisible()
-
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

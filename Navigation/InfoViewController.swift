@@ -1,12 +1,17 @@
-import SwiftUI
+import UIKit
+
 class InfoViewController: UIViewController{
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        view.alpha = 0.85
         title = "Info"
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
         let btShowPost = UIButton(type: .system)
         btShowPost.isUserInteractionEnabled = true
         btShowPost.frame = CGRect(origin: CGPoint(x: view.safeAreaInsets.top, y: view.safeAreaInsets.top), size: CGSize(width: 100, height: 20))
@@ -20,19 +25,19 @@ class InfoViewController: UIViewController{
         btShowAlert.backgroundColor = .systemYellow
         btShowAlert.setTitleColor(.black, for: .normal)
         btShowAlert.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
+        
         view.addSubview(btShowPost)
         view.addSubview(btShowAlert)
-
     }
+
     @objc func closeInfo(){
-
         self.dismiss(animated: true, completion: nil)
-
     }
+
     @objc func showAlert(){
         let alert = UIAlertController(title: "It's alert", message: "All is Ok", preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel)
-        let actionOk = UIAlertAction(title: "Ok", style: .default)
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in print("Pressed Cancel")}
+        let actionOk = UIAlertAction(title: "Ok", style: .default) { _ in print("Pressed Ok")}
         alert.addAction(actionOk)
         alert.addAction(actionCancel)
         present(alert, animated: false)
