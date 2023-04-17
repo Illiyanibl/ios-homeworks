@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+final class ProfileHeaderView: UIView {
 
     var avatarView = UIView()
     var userName = UILabel()
@@ -17,6 +17,7 @@ class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        addSubView()
     }
 
     required init?(coder: NSCoder) {
@@ -24,20 +25,7 @@ class ProfileHeaderView: UIView {
     }
 
     override func layoutSubviews() {
-
-        avatarView.frame = CGRect(origin: CGPoint(x: 16, y: 16), size: CGSize(width: frame.width / 3 , height: frame.width / 3 ))
-        avatarView.layer.cornerRadius = avatarView.frame.height / 2
-
-        userName.frame = CGRect(origin: CGPoint(x: avatarView.frame.maxX + 32 , y: 27), size: CGSize(width: frame.width * (2 / 3) - 64 , height: 30))
-
-        btShowStatus.frame = CGRect(origin: CGPoint(x: 16, y: avatarView.frame.maxY + 16), size: CGSize(width: frame.width - 32, height: 50))
-        btShowStatus.layer.cornerRadius = 4
-        btShowStatus.layer.shadowOffset = CGSize(width: 4, height: 4)
-        btShowStatus.layer.shadowRadius = 4
-        btShowStatus.layer.shadowColor = UIColor.black.cgColor
-        btShowStatus.layer.shadowOpacity = 0.7
-
-        txtStatus.frame = CGRect(origin: CGPoint(x: avatarView.frame.maxX + 32, y: btShowStatus.frame.minY - 34 - 24), size: CGSize(width: frame.width * (2 / 3) - 64, height: 24))
+        addAllFrame()
     }
 
     func setupViews() {
@@ -51,27 +39,59 @@ class ProfileHeaderView: UIView {
             return $0
         }(UIView())
 
-        let userNameFont = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.bold)
-        userName.text = "User Name"
-        userName.textColor = .black
-        userName.font = userNameFont
+        userName = {
+            let lebel = UILabel()
+            let userNameFont = UIFont.systemFont(ofSize: 18, weight: .bold)
+            lebel.text = "User Name"
+            lebel.textColor = .black
+            lebel.font = userNameFont
+            return lebel
+        }()
 
-        btShowStatus.setTitle("Show status", for: .normal)
-        btShowStatus.setTitleColor(.white, for: .normal)
-        btShowStatus.backgroundColor = .systemBlue
-        btShowStatus.tintColor = .white
-        btShowStatus.addTarget(self, action: #selector(btShowStatusPresed), for: .touchUpInside)
+        btShowStatus = {
+            let button = UIButton()
+            button.setTitle("Show status", for: .normal)
+            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = .systemBlue
+            button.tintColor = .white
+            button.layer.cornerRadius = 4
+            button.layer.shadowOffset = CGSize(width: 4, height: 4)
+            button.layer.shadowRadius = 4
+            button.layer.shadowColor = UIColor.black.cgColor
+            button.layer.shadowOpacity = 0.7
+            button.addTarget(self, action: #selector(btShowStatusPresed), for: .touchUpInside)
+            return button
+        }()
 
-        let txtStatusFont = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
-        txtStatus.text = "It's my status..."
-        txtStatus.backgroundColor = self.backgroundColor
-        txtStatus.textColor = .gray
-        txtStatus.font = txtStatusFont
 
+        txtStatus = {
+            let text = UITextView()
+            let txtStatusFont = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
+            text.text = "It's my status..."
+            text.backgroundColor = self.backgroundColor
+            text.textColor = .gray
+            text.font = txtStatusFont
+            return text
+        }()
+    }
+
+    private func addSubView(){
+        
         addSubview(avatarView)
         addSubview(userName)
         addSubview(btShowStatus)
         addSubview(txtStatus)
+    }
+
+    private func addAllFrame(){
+        avatarView.frame = CGRect(origin: CGPoint(x: 16, y: 16), size: CGSize(width: frame.width / 3 , height: frame.width / 3 ))
+        avatarView.layer.cornerRadius = avatarView.frame.height / 2
+
+        userName.frame = CGRect(origin: CGPoint(x: avatarView.frame.maxX + 32 , y: 27), size: CGSize(width: frame.width * (2 / 3) - 64 , height: 30))
+
+        btShowStatus.frame = CGRect(origin: CGPoint(x: 16, y: avatarView.frame.maxY + 16), size: CGSize(width: frame.width - 32, height: 50))
+
+        txtStatus.frame = CGRect(origin: CGPoint(x: avatarView.frame.maxX + 32, y: btShowStatus.frame.minY - 34 - 24), size: CGSize(width: frame.width * (2 / 3) - 64, height: 24))
     }
 
     @objc func btShowStatusPresed() {
