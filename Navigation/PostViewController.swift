@@ -1,4 +1,5 @@
 import UIKit
+
 class PostViewController: UIViewController {
 
     var getPost: Post?

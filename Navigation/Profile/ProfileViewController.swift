@@ -1,8 +1,15 @@
 import UIKit
+
 final class ProfileViewController: UIViewController{
 
     let profileHeaderView = ProfileHeaderView()
-    var newButton = UIButton()
+
+    let newButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("We are wating new finction!", for: .normal)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,19 +21,11 @@ final class ProfileViewController: UIViewController{
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         addAllConstraints()
-
     }
+    
     func createAllView(){
         creatProfileHeaderView()
-
-        newButton = {
-            let button = UIButton(type: .system)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.setTitle("We are wating new finction!", for: .normal)
-            return button
-        }()
         view.addSubview(newButton)
-
     }
 
     func creatProfileHeaderView(){
@@ -36,19 +35,16 @@ final class ProfileViewController: UIViewController{
     }
     
     private func addAllConstraints(){
-        let profileHeaderControllerConstraints = [
+        NSLayoutConstraint.activate([
             profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
-        ]
-        let anotherConstraints = [
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
+
             newButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             newButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             newButton.heightAnchor.constraint(equalToConstant: 30)
-        ]
-        var allConstraints = profileHeaderControllerConstraints + anotherConstraints
-        NSLayoutConstraint.activate(allConstraints)
+        ])
     }
 }

@@ -7,18 +7,12 @@ final class FeedViewController: UIViewController{
         super.viewDidLoad()
         view.backgroundColor = .gray
         title = "Feed"
-        let xO = view.safeAreaLayoutGuide.layoutFrame.minX
-        let yO = view.safeAreaLayoutGuide.layoutFrame.minY
-        print("\(xO) and \(yO)")
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupView()
         addSubView()
-        let xO = view.safeAreaLayoutGuide.layoutFrame.minX
-        let yO = view.safeAreaLayoutGuide.layoutFrame.minY
-        print("\(xO) and \(yO)")
     }
     
     private func setupView(){
