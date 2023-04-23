@@ -3,14 +3,15 @@ import UIKit
 final class ProfileHeaderView: UIView {
 
     let avatarImageView = {
-        $0.backgroundColor = .systemBackground
-        $0.layer.contents = UIImage(named: "dog")?.cgImage
-        $0.layer.masksToBounds = true
-        $0.layer.borderColor = UIColor.white.cgColor
-        $0.layer.borderWidth = 3
-        $0.layer.cornerRadius = 75
-        return $0
-    }(UIView())
+        let image = UIView()
+        image.backgroundColor = .systemBackground
+        image.layer.contents = UIImage(named: "dog")?.cgImage
+        image.layer.masksToBounds = true
+        image.layer.borderColor = UIColor.white.cgColor
+        image.layer.borderWidth = 3
+        image.layer.cornerRadius = 75
+        return image
+    }()
 
     let fullNameLabel = {
         let lebel = UILabel()
@@ -22,11 +23,12 @@ final class ProfileHeaderView: UIView {
     }()
 
     let statusLabel = {
-        $0.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
-        $0.textColor = .gray
-        $0.text = "It's empty label"
-        return $0
-    }(UILabel())
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
+        label.textColor = .gray
+        label.text = "It's empty label"
+        return label
+    }()
 
     let setStatusButton = {
         let button = UIButton()
@@ -68,21 +70,6 @@ final class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func point(inside point: CGPoint,
-                        with event: UIEvent?) -> Bool
-    {
-        let inside = super.point(inside: point, with: event)
-        if !inside {
-            for subview in subviews {
-                let pointInSubview = subview.convert(point, from: self)
-                if subview.point(inside: pointInSubview, with: event) {
-                    return true
-                }
-            }
-        }
-        return inside
-    }
-
     override func layoutSubviews() {
         addConstraints()
     }
@@ -91,6 +78,7 @@ final class ProfileHeaderView: UIView {
         let allSubView = [avatarImageView, fullNameLabel, setStatusButton, statusTextField, statusLabel]
         ([self] + allSubView).forEach() {$0.translatesAutoresizingMaskIntoConstraints = false}
         allSubView.forEach() {self.addSubview($0)}
+        //addConstraints()
     }
 
     private func addConstraints(){
@@ -102,7 +90,6 @@ final class ProfileHeaderView: UIView {
             avatarImageView.widthAnchor.constraint(equalToConstant: avatarImageView.layer.cornerRadius * 2),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
 
-
             fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
             fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
             fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
@@ -112,6 +99,8 @@ final class ProfileHeaderView: UIView {
             setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+
+            setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
 
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
             statusTextField.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),

@@ -1,7 +1,6 @@
 import UIKit
 
 final class FeedViewController: UIViewController{
-    var btShowPost = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -12,12 +11,11 @@ final class FeedViewController: UIViewController{
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupView()
-        addSubView()
     }
     
     private func setupView(){
 
-        btShowPost = {
+      let  btShowPost = {
             let button = UIButton(type: .system)
             button.isUserInteractionEnabled = true
             button.frame = CGRect(origin: CGPoint(x: view.safeAreaInsets.left + 8, y: view.safeAreaInsets.top + 8), size: CGSize(width: 100, height: 20))
@@ -25,12 +23,11 @@ final class FeedViewController: UIViewController{
             button.backgroundColor = .systemYellow
             button.setTitleColor(.black, for: .normal)
             button.tintColor = .black
-            button.addTarget(self, action: #selector(showPost), for: .touchUpInside)
+            button.addTarget(nil, action: #selector(showPost), for: .touchUpInside)
             return button
         }()
-    }
-    private func addSubView(){
         view.addSubview(btShowPost)
+
     }
 
     @objc func showPost(){

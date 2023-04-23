@@ -3,6 +3,8 @@ import UIKit
 class PostViewController: UIViewController {
 
     var getPost: Post?
+    let messageLabel = UILabel()
+    lazy var rightButton : UIBarButtonItem = UIBarButtonItem(title: "Info", style: UIBarButtonItem.Style.plain, target: self, action: #selector(openInfo))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -12,16 +14,14 @@ class PostViewController: UIViewController {
         } else {
             title = "No title"
         }
-        let rightButton : UIBarButtonItem = UIBarButtonItem(title: "Info", style: UIBarButtonItem.Style.plain, target: self, action: #selector(openInfo))
         self.navigationItem.rightBarButtonItem = rightButton
+        view.addSubview(messageLabel)
+        messageLabel.text = getPost?.message
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let messageLabel = UILabel()
-        messageLabel.frame = CGRect(origin: CGPoint(x: view.safeAreaInsets.left + 8, y: view.safeAreaInsets.top + 8), size: CGSize(width: 100, height: 20))
-        messageLabel.text = getPost?.message
-        view.addSubview(messageLabel)
+        messageLabel.frame = CGRect(origin: CGPoint(x: 8, y: view.safeAreaInsets.top + 8), size: CGSize(width: 100, height: 20))
     }
     
     @objc func openInfo(){
