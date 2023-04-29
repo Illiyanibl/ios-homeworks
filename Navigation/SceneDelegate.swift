@@ -19,10 +19,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabMainViewController = UITabBarController()
         tabMainViewController.tabBar.tintColor = .systemYellow
         tabMainViewController.tabBar.unselectedItemTintColor = .darkGray
-
-        let profileViewController = ProfileViewController()
         let feedViwController = FeedViewController()
-        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        let loginViewController = LoginViewController()
+
+        let profileNavigationController = UINavigationController(rootViewController: loginViewController)
+        profileNavigationController.navigationBar.backgroundColor = .white
+        profileNavigationController.navigationBar.isHidden = true
+        
         let feedNavigationController = UINavigationController(rootViewController: feedViwController)
         feedNavigationController.title = "Feed"
         feedNavigationController.view.backgroundColor = .darkGray
