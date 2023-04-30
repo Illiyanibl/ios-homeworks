@@ -25,13 +25,20 @@ final class LoginViewController: UIViewController {
         return image
     }()
 
-    private let authorizationViewGroup: UIView = {
+    private let authorizationViewGroup: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.clipsToBounds = true
+        stackView.layer.cornerRadius = 10
+        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.layer.borderWidth = 0.5
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    private let separatorView: UIView = {
         let view = UIView()
-        view.clipsToBounds = true
-        view.layer.cornerRadius = 10
-        view.layer.borderColor = UIColor.lightGray.cgColor
-        view.layer.borderWidth = 0.5
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .lightGray
         return view
     }()
 
@@ -42,8 +49,6 @@ final class LoginViewController: UIViewController {
         text.indent(size: 16)
         text.backgroundColor = .systemGray6
         text.textColor = .black
-        text.layer.borderColor = UIColor.lightGray.cgColor
-        text.layer.borderWidth = 0.5
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
@@ -55,8 +60,6 @@ final class LoginViewController: UIViewController {
         text.textColor = .black
         text.autocapitalizationType = .none
         text.indent(size: 16)
-        text.layer.borderColor = UIColor.lightGray.cgColor
-        text.layer.borderWidth = 0.5
         text.isSecureTextEntry = true
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
@@ -93,8 +96,9 @@ final class LoginViewController: UIViewController {
         scrollView.addSubview(loginView)
         loginView.addSubview(logoLogin)
         loginView.addSubview(authorizationViewGroup)
-        authorizationViewGroup.addSubview(loginText)
-        authorizationViewGroup.addSubview(passwordText)
+        authorizationViewGroup.addArrangedSubview(loginText)
+        authorizationViewGroup.addArrangedSubview(separatorView)
+        authorizationViewGroup.addArrangedSubview(passwordText)
         loginView.addSubview(btLogIN)
     }
 
@@ -156,6 +160,11 @@ final class LoginViewController: UIViewController {
             authorizationViewGroup.trailingAnchor.constraint(equalTo: loginView.trailingAnchor, constant: -16),
             authorizationViewGroup.topAnchor.constraint(equalTo: logoLogin.bottomAnchor, constant: 120),
             authorizationViewGroup.heightAnchor.constraint(equalToConstant: 100),
+
+            separatorView.leadingAnchor.constraint(equalTo: authorizationViewGroup.leadingAnchor),
+            separatorView.trailingAnchor.constraint(equalTo: authorizationViewGroup.trailingAnchor),
+            separatorView.topAnchor.constraint(equalTo: loginText.bottomAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 0.5),
 
 
             loginText.leadingAnchor.constraint(equalTo: authorizationViewGroup.leadingAnchor),
