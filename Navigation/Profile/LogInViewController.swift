@@ -42,7 +42,7 @@ final class LoginViewController: UIViewController {
         return view
     }()
 
-        private let  loginText: UITextField = {
+    private let  loginText: UITextField = {
         let text = UITextField()
         text.placeholder = "Email or phone"
         text.autocapitalizationType = .none
@@ -161,21 +161,8 @@ final class LoginViewController: UIViewController {
             authorizationViewGroup.topAnchor.constraint(equalTo: logoLogin.bottomAnchor, constant: 120),
             authorizationViewGroup.heightAnchor.constraint(equalToConstant: 100),
 
-            separatorView.leadingAnchor.constraint(equalTo: authorizationViewGroup.leadingAnchor),
-            separatorView.trailingAnchor.constraint(equalTo: authorizationViewGroup.trailingAnchor),
-            separatorView.topAnchor.constraint(equalTo: loginText.bottomAnchor),
-            separatorView.heightAnchor.constraint(equalToConstant: 0.5),
-
-
-            loginText.leadingAnchor.constraint(equalTo: authorizationViewGroup.leadingAnchor),
-            loginText.trailingAnchor.constraint(equalTo: authorizationViewGroup.trailingAnchor),
-            loginText.topAnchor.constraint(equalTo: authorizationViewGroup.topAnchor),
-            loginText.heightAnchor.constraint(equalToConstant: 50),
-
-            passwordText.leadingAnchor.constraint(equalTo: authorizationViewGroup.leadingAnchor),
-            passwordText.trailingAnchor.constraint(equalTo: authorizationViewGroup.trailingAnchor),
-            passwordText.bottomAnchor.constraint(equalTo: authorizationViewGroup.bottomAnchor),
-            passwordText.heightAnchor.constraint(equalToConstant: 50),
+            loginText.heightAnchor.constraint(equalToConstant: 49.5),
+            passwordText.heightAnchor.constraint(equalToConstant: 49.5),
 
             btLogIN.leadingAnchor.constraint(equalTo: loginView.leadingAnchor, constant: 16),
             btLogIN.trailingAnchor.constraint(equalTo: loginView.trailingAnchor, constant: -16),
