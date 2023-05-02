@@ -13,6 +13,9 @@
 		517F5DAA29E15ABE00EB4285 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517F5DA929E15ABE00EB4285 /* ViewController.swift */; };
 		517F5DAF29E15ABF00EB4285 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 517F5DAE29E15ABF00EB4285 /* Assets.xcassets */; };
 		517F5DB229E15ABF00EB4285 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 517F5DB029E15ABF00EB4285 /* LaunchScreen.storyboard */; };
+		51BF5A8229FFD56E00AEBE38 /* UsersPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF5A8129FFD56E00AEBE38 /* UsersPost.swift */; };
+		51BF5A842A001B2300AEBE38 /* PostCustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF5A832A001B2300AEBE38 /* PostCustomViewCell.swift */; };
+		51BF5A862A002AB300AEBE38 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF5A852A002AB300AEBE38 /* UIViewExtension.swift */; };
 		51C8E3B729E1800500C3C1FF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C8E3B629E1800500C3C1FF /* ProfileViewController.swift */; };
 		51C8E3B929E299F200C3C1FF /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C8E3B829E299F200C3C1FF /* FeedViewController.swift */; };
 		51C8E3BB29E2A5DC00C3C1FF /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C8E3BA29E2A5DC00C3C1FF /* PostViewController.swift */; };
@@ -30,6 +33,9 @@
 		517F5DAE29E15ABF00EB4285 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		517F5DB129E15ABF00EB4285 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		517F5DB329E15ABF00EB4285 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51BF5A8129FFD56E00AEBE38 /* UsersPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersPost.swift; sourceTree = "<group>"; };
+		51BF5A832A001B2300AEBE38 /* PostCustomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCustomViewCell.swift; sourceTree = "<group>"; };
+		51BF5A852A002AB300AEBE38 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		51C8E3B629E1800500C3C1FF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		51C8E3B829E299F200C3C1FF /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		51C8E3BA29E2A5DC00C3C1FF /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -78,9 +84,20 @@
 				51C8E3BA29E2A5DC00C3C1FF /* PostViewController.swift */,
 				51C8E3BC29E2B0AE00C3C1FF /* InfoViewController.swift */,
 				51C8E3BE29E3191C00C3C1FF /* Post.swift */,
+				51BF5A7E29FE6E4F00AEBE38 /* PostGroup */,
 				51CBB1EB29EB07AF007F4115 /* Profile */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		51BF5A7E29FE6E4F00AEBE38 /* PostGroup */ = {
+			isa = PBXGroup;
+			children = (
+				51BF5A8129FFD56E00AEBE38 /* UsersPost.swift */,
+				51BF5A832A001B2300AEBE38 /* PostCustomViewCell.swift */,
+				51BF5A852A002AB300AEBE38 /* UIViewExtension.swift */,
+			);
+			path = PostGroup;
 			sourceTree = "<group>";
 		};
 		51CBB1EB29EB07AF007F4115 /* Profile */ = {
@@ -166,12 +183,15 @@
 				51C8E3BB29E2A5DC00C3C1FF /* PostViewController.swift in Sources */,
 				517F5DAA29E15ABE00EB4285 /* ViewController.swift in Sources */,
 				517F5DA629E15ABE00EB4285 /* AppDelegate.swift in Sources */,
+				51BF5A842A001B2300AEBE38 /* PostCustomViewCell.swift in Sources */,
 				51C8E3BF29E3191C00C3C1FF /* Post.swift in Sources */,
 				51CBB1ED29EB07E0007F4115 /* ProfileHeaderView.swift in Sources */,
 				51C8E3BD29E2B0AE00C3C1FF /* InfoViewController.swift in Sources */,
 				51C8E3B929E299F200C3C1FF /* FeedViewController.swift in Sources */,
 				51C8E3B729E1800500C3C1FF /* ProfileViewController.swift in Sources */,
+				51BF5A862A002AB300AEBE38 /* UIViewExtension.swift in Sources */,
 				51459DFA29F7F908001D43FD /* LogInViewController.swift in Sources */,
+				51BF5A8229FFD56E00AEBE38 /* UsersPost.swift in Sources */,
 				517F5DA829E15ABE00EB4285 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

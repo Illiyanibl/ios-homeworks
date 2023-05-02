@@ -11,6 +11,16 @@ final class ProfileViewController: UIViewController{
         return button
     }()
 
+    private let userPost = UsersPost.createPost()
+
+    lazy var tableView: UITableView = {
+      let  table = UITableView(frame: .zero, style: .plain)
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.dataSource = self
+        table.register(PostCustomViewCell.self, forCellReuseIdentifier: PostCustomViewCell.identifier)
+        return table
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
@@ -25,6 +35,7 @@ final class ProfileViewController: UIViewController{
     
     func createAllView(){
         creatProfileHeaderView()
+        view.addSubview(tableView)
         view.addSubview(newButton)
     }
 
@@ -40,10 +51,31 @@ final class ProfileViewController: UIViewController{
             profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
 
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: profileHeaderView.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: newButton.topAnchor),
+
+
             newButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             newButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             newButton.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
+}
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        userPost.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PostCustomViewCell.identifier, for: indexPath) as! PostCustomViewCell
+        cell.setupSell(post: userPost[indexPath.row])
+        return cell
+
+
+    }
+
+
 }
