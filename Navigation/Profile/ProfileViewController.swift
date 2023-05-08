@@ -36,7 +36,7 @@ final class ProfileViewController: UIViewController{
     func createAllView(){
         creatProfileHeaderView()
         view.addSubview(tableView)
-        view.addSubview(newButton)
+       // view.addSubview(newButton)
     }
 
     func creatProfileHeaderView(){
@@ -54,13 +54,7 @@ final class ProfileViewController: UIViewController{
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: profileHeaderView.bottomAnchor),
-            tableView.bottomAnchor.constraint(equalTo: newButton.topAnchor),
-
-
-            newButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            newButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            newButton.heightAnchor.constraint(equalToConstant: 30)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 }
