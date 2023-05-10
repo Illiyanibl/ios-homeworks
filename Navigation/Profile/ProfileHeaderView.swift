@@ -78,7 +78,6 @@ final class ProfileHeaderView: UIView {
         let allSubView = [avatarImageView, fullNameLabel, setStatusButton, statusTextField, statusLabel]
         ([self] + allSubView).forEach() {$0.translatesAutoresizingMaskIntoConstraints = false}
         allSubView.forEach() {self.addSubview($0)}
-        //addConstraints()
     }
 
     private func addConstraints(){
