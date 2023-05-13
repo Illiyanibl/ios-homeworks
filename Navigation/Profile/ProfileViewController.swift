@@ -28,21 +28,13 @@ import UIKit
         return table
     }()
 
-    lazy var photosTableView: UITableView = {
-      let  table = UITableView(frame: .zero, style: .plain)
+    lazy var photoView: UITableView = {
+        let  table = UITableView(frame: .zero, style: .plain)
         table.translatesAutoresizingMaskIntoConstraints = false
         table.dataSource = self
         table.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
         return table
     }()
-
-     let photoView: PhotosTableViewCell = {
-         let  view = PhotosTableViewCell()
-           view.translatesAutoresizingMaskIntoConstraints = false
-
-         return view
-     }()
-
 
 
     override func viewDidLoad() {
@@ -71,6 +63,7 @@ import UIKit
     }
     
     private func addAllConstraints(){
+   
         NSLayoutConstraint.activate([
             profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
@@ -84,6 +77,7 @@ import UIKit
             photoView.topAnchor.constraint(equalTo: profileHeaderView.bottomAnchor, constant: 4),
             photoView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             photoView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            photoView.heightAnchor.constraint(equalToConstant: 200),
 
 
             tableViewM.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -91,6 +85,9 @@ import UIKit
            tableViewM.topAnchor.constraint(equalTo: photoView.bottomAnchor),
             tableViewM.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+
+        let cellHeiht = photoView.contentSize.height
+           print(cellHeiht)
     }
 }
 extension ProfileViewController: UITableViewDataSource {
@@ -104,15 +101,13 @@ extension ProfileViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PostCustomViewCell.identifier, for: indexPath) as! PostCustomViewCell
-        cell.setupSell(post: userPost[indexPath.row])
 
-
- //       let photosCell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
 
         if tableView == tableViewM {
-           return cell }
-        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: PostCustomViewCell.identifier, for: indexPath) as! PostCustomViewCell
+            cell.setupSell(post: userPost[indexPath.row])
+           return cell } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
             return cell
         }
 
