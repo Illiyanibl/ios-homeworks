@@ -32,6 +32,7 @@ import UIKit
         let  table = UITableView(frame: .zero, style: .plain)
         table.translatesAutoresizingMaskIntoConstraints = false
         table.dataSource = self
+        table.delegate = self
         table.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
         return table
     }()
@@ -42,12 +43,13 @@ import UIKit
         view.backgroundColor = .lightGray
         title = "Profile"
         createAllView()
+        addAllConstraints(cellHeight: PhotosTableViewCell().getCellH())
     }
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        addAllConstraints()
-    }
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+ //       addAllConstraints()
+ //   }
     
     func createAllView(){
         creatProfileHeaderView()
@@ -61,8 +63,14 @@ import UIKit
         profileHeaderView.backgroundColor = .darkGray
         view.addSubview(profileHeaderView)
     }
+
+     func goToPhotosViewController(){
+         let photoViewController = PhotosViewController()
+         navigationController?.pushViewController(photoViewController, animated: false)
+     }
     
-    private func addAllConstraints(){
+     private func addAllConstraints(cellHeight: CGFloat){
+         print(cellHeight)
    
         NSLayoutConstraint.activate([
             profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
@@ -77,20 +85,17 @@ import UIKit
             photoView.topAnchor.constraint(equalTo: profileHeaderView.bottomAnchor, constant: 4),
             photoView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             photoView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            photoView.heightAnchor.constraint(equalToConstant: 200),
+            photoView.heightAnchor.constraint(equalToConstant: 140),
 
 
             tableViewM.leadingAnchor.constraint(equalTo: view.leadingAnchor),
            tableViewM.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-           tableViewM.topAnchor.constraint(equalTo: photoView.bottomAnchor),
+            tableViewM.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 2),
             tableViewM.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-
-        let cellHeiht = photoView.contentSize.height
-           print(cellHeiht)
     }
 }
-extension ProfileViewController: UITableViewDataSource {
+extension ProfileViewController: UITableViewDataSource , UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tableViewM {
@@ -101,8 +106,6 @@ extension ProfileViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-
         if tableView == tableViewM {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostCustomViewCell.identifier, for: indexPath) as! PostCustomViewCell
             cell.setupSell(post: userPost[indexPath.row])
@@ -110,8 +113,9 @@ extension ProfileViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
             return cell
         }
-
     }
 
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        goToPhotosViewController()
+        }
 }
