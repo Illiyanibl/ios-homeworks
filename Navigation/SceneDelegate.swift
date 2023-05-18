@@ -24,7 +24,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let profileNavigationController = UINavigationController(rootViewController: loginViewController)
         profileNavigationController.navigationBar.backgroundColor = .white
-        profileNavigationController.navigationBar.isHidden = true
         
         let feedNavigationController = UINavigationController(rootViewController: feedViwController)
         feedNavigationController.title = "Feed"
