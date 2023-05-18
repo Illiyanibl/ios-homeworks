@@ -53,7 +53,6 @@ class PhotosViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor)
         ])
     }
-
 }
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout{
@@ -88,5 +87,4 @@ extension PhotosViewController: UICollectionViewDataSource {
         cell.setupSell(photo: photoGallery[indexPath.item])
         return cell
     }
-
 }

@@ -33,8 +33,11 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     }
 
     func customizeCellView(){
-       cellView.contentMode = .scaleAspectFill
+        cellView.contentMode = .scaleAspectFill
         cellView.layer.masksToBounds = true
+    }
+    func setCornerRadius() {
+        cellView.layer.cornerRadius = 6
     }
 
     func setupConstraints(){

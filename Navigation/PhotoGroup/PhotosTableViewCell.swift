@@ -16,6 +16,13 @@ final class PhotosTableViewCell: UITableViewCell {
         return view
     }()
 
+    let arrowImg: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "arrow")
+        return image
+    }()
+
     lazy var  collectionView: UICollectionView = {
         let loyut = UICollectionViewFlowLayout()
         loyut.scrollDirection = .horizontal
@@ -43,7 +50,7 @@ final class PhotosTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-    layout()
+        layout()
     }
 
 
@@ -51,13 +58,12 @@ final class PhotosTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-   
+
 
     func layout(){
         [cellView].forEach {contentView.addSubview($0) }
         contentView.backgroundColor = .white
-        cellView.addSubview(photosLabel)
-        cellView.addSubview(collectionView)
+        [photosLabel, collectionView, arrowImg].forEach {cellView.addSubview($0) }
         setConstraints()
     }
     func getCellH() -> CGFloat {
@@ -75,14 +81,17 @@ final class PhotosTableViewCell: UITableViewCell {
 
             photosLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 12),
             photosLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: 12),
-            photosLabel.topAnchor.constraint(equalTo: cellView.topAnchor),
+            photosLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 12),
+
+            arrowImg.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -12),
+            arrowImg.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
 
             collectionView.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 4),
-            collectionView.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: 4),
+            collectionView.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -4),
             collectionView.topAnchor.constraint(equalTo: photosLabel.bottomAnchor, constant: 0),
             collectionView.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: 0),
             collectionView.heightAnchor.constraint(equalTo: cellView.widthAnchor, multiplier: 0.28),
-            ])
+        ])
     }
 }
 extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
@@ -102,6 +111,7 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return inset
     }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
@@ -109,17 +119,21 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return inset
     }
+
 }
 
 extension PhotosTableViewCell: UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         photoGallery.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as! PhotosCollectionViewCell
         cell.setupSell(photo: photoGallery[indexPath.item])
+        cell.setCornerRadius()
+
         return cell
     }
 }
-
