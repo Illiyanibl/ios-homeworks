@@ -2,14 +2,15 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
     
-    let avatarImageView = {
+    lazy var avatarImageView = {
         let image = UIView()
         image.backgroundColor = .systemBackground
         image.layer.contents = UIImage(named: "dog")?.cgImage
         image.layer.masksToBounds = true
         image.layer.borderColor = UIColor.white.cgColor
         image.layer.borderWidth = 3
-        image.layer.cornerRadius = 75
+        image.translatesAutoresizingMaskIntoConstraints = false
+       image.layer.cornerRadius = 75
         return image
     }()
     
