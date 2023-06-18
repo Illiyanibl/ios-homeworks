@@ -2,6 +2,9 @@ import UIKit
 
 final class PostCustomViewCell: UITableViewCell {
     
+    var callBack: (() -> Void)?
+    var callBackImageTap: (() -> Void)?
+    
     
     let authorLabel: UILabel = {
         let label = UILabel()
@@ -14,6 +17,13 @@ final class PostCustomViewCell: UITableViewCell {
         
         return label
     }()
+    let liksView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alpha = 0.2
+        return view
+    }()
     
     let descriptionLabel: UILabel = {
         let label = UILabel()
@@ -21,7 +31,7 @@ final class PostCustomViewCell: UITableViewCell {
         label.backgroundColor = .white
         label.font = labelFont
         label.textColor = .systemGray
-        label.numberOfLines = 0
+        label.numberOfLines = 3
         label.font = labelFont
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -72,16 +82,36 @@ final class PostCustomViewCell: UITableViewCell {
         descriptionLabel.text = post.description
         likesLabel.text = "Likes: " + String(post.likes)
         viewsLabel.text = "Views: " + String(post.views)
+        
     }
+    
+    func setupGesture(){
+        let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(tapLike))
+        let tapImageGesture = UITapGestureRecognizer(target: self, action: #selector(tapImage))
+        liksView.addGestureRecognizer(tapLikeGesture)
+        postImage.addGestureRecognizer(tapImageGesture)
+        
+    }
+    @objc func tapLike(){
+        callBack?()
+    }
+    
+    @objc func tapImage(){
+        print("Tap image")
+        callBackImageTap?()
+    }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func layout() {
-        [authorLabel, descriptionLabel, postImage, likesLabel, viewsLabel].forEach {contentView.addSubview($0) }
+        [authorLabel, descriptionLabel, postImage, likesLabel, viewsLabel, liksView].forEach {contentView.addSubview($0) }
         setConstraints()
+        setupGesture()
     }
+    
     
     private func setConstraints(){
         
@@ -105,9 +135,15 @@ final class PostCustomViewCell: UITableViewCell {
             viewsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: indentLeftRight),
             viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -indentLeftRight),
             
+            
             likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: indentLeftRight),
             likesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -indentLeftRight),
             likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -indentLeftRight),
+            
+            liksView.centerXAnchor.constraint(equalTo: likesLabel.centerXAnchor),
+            liksView.centerYAnchor.constraint(equalTo: likesLabel.centerYAnchor),
+            liksView.widthAnchor.constraint(equalTo: likesLabel.widthAnchor),
+            liksView.heightAnchor.constraint(equalTo: likesLabel.heightAnchor),
         ])
     }
 }

@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(named: "feed"), tag: 2)
 
         tabMainViewController.viewControllers = [profileNavigationController, feedNavigationController]
-        tabMainViewController.selectedIndex = 1
+        tabMainViewController.selectedIndex = 0
         tabMainViewController.tabBar.backgroundColor = .black
         tabMainViewController.tabBar.barTintColor = .darkGray
 

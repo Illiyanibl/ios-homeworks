@@ -3,8 +3,7 @@ import UIKit
 class ProfileViewController: UIViewController{
     
     let profileHeaderView = ProfileHeaderView()
-    
-    private let userPost = UsersPost.createPost()
+    private var userPost = UsersPost.createPost()
     
     lazy var tableViewM: UITableView = {
         let  table = UITableView(frame: .zero, style: .plain)
@@ -57,6 +56,7 @@ class ProfileViewController: UIViewController{
         setup()
     }
 
+
     
     // Напоминалкв чтобы не забывть функцию
     // override func viewWillLayoutSubviews() {
@@ -104,7 +104,6 @@ class ProfileViewController: UIViewController{
 
 
     func avatarAnimationOpen(){
-        //   let centerOrigin = avatar.center
         let finalCenter = self.view.center
 
         let animator = UIViewPropertyAnimator(duration: 0.5, curve: .linear){
@@ -143,7 +142,6 @@ class ProfileViewController: UIViewController{
         animatorBtClose.startAnimation(afterDelay: 0.0)
     }
 
-    
     func creatProfileHeaderView(){
         profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
         profileHeaderView.backgroundColor = .darkGray
@@ -155,7 +153,6 @@ class ProfileViewController: UIViewController{
         navigationController?.pushViewController(photoViewController, animated: false)
     }
 
-
     private func setupShowingAvatarConstraints(){
         NSLayoutConstraint.activate([
             bgView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -166,7 +163,6 @@ class ProfileViewController: UIViewController{
             btCloseBgView.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: -6),
             btCloseBgView.topAnchor.constraint(equalTo: bgView.topAnchor, constant: 6),
         ])
-
     }
     
     private func setupConstraints(cellHeight: CGFloat){
@@ -204,7 +200,25 @@ extension ProfileViewController: UITableViewDataSource , UITableViewDelegate {
         if tableView == tableViewM {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostCustomViewCell.identifier, for: indexPath) as! PostCustomViewCell
             cell.setupSell(post: userPost[indexPath.row])
+
+            cell.callBack = { [weak self] in
+                guard let self = self else { return }
+                self.userPost[indexPath.row].likes += 1
+                cell.setupSell(post: self.userPost[indexPath.row])
+            }
+
+            cell.callBackImageTap = { [weak self] in
+                guard let self = self else { return }
+                self.userPost[indexPath.row].views += 1
+                cell.setupSell(post: self.userPost[indexPath.row])
+                let post = PostView()
+                post.showPost(post: self.userPost[indexPath.row])
+                let postController = UIViewController()
+                postController.view = post
+                self.navigationController?.present(postController, animated: true)
+            }
             return cell }
+
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
             return cell
@@ -212,6 +226,9 @@ extension ProfileViewController: UITableViewDataSource , UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        goToPhotosViewController()
+        if tableView == tableViewM {}
+        else {
+            goToPhotosViewController()
+        }
     }
 }

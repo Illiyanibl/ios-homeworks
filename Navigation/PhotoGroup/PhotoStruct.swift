@@ -11,7 +11,7 @@ struct PhotoStruct {
     var photoName: String
     var isLocalPhoto: Bool = true
     var urlPhoto: String? = nil
-
+    
     static func createLocalGallery() -> [PhotoStruct] {
         var photoList: [PhotoStruct] = []
         let photoName: [String] = ["IMG_0859", "IMG_0881", "IMG_0912", "IMG_0922", "IMG_0927",

@@ -9,33 +9,42 @@ import UIKit
 
 final class PhotosCollectionViewCell: UICollectionViewCell {
 
+    var callBackShowImage: ((CGRect) -> Void)?
+
     let cellView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         return imageView
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(cellView)
-        customizeContenView()
-        customizeCellView()
-        setupConstraints()
+        layout()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func customizeContenView(){
+    func layout(){
         contentView.addSubview(cellView)
+
+        setupGesture()
+        setupConstraints()
     }
 
-    func customizeCellView(){
-        cellView.contentMode = .scaleAspectFill
-        cellView.layer.masksToBounds = true
+    func setupGesture(){
+        let tapCollectionGesture = UITapGestureRecognizer(target: self, action: #selector(tapCollection))
+        self.addGestureRecognizer(tapCollectionGesture)
     }
+
+    @objc func tapCollection(){
+        print("Tap Collection")
+        callBackShowImage?(self.frame)
+    }
+
     func setCornerRadius() {
         cellView.layer.cornerRadius = 6
     }
@@ -53,3 +62,13 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         cellView.image = UIImage(named: photo.photoName)
     }
 }
+
+extension PhotosCollectionViewCell: UICollectionViewDelegateFlowLayout{
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("no")
+
+    }
+
+}
+

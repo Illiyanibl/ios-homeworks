@@ -10,7 +10,7 @@ final class ProfileHeaderView: UIView {
         image.layer.borderColor = UIColor.white.cgColor
         image.layer.borderWidth = 3
         image.translatesAutoresizingMaskIntoConstraints = false
-       image.layer.cornerRadius = 75
+        image.layer.cornerRadius = 75
         return image
     }()
     
@@ -113,7 +113,31 @@ final class ProfileHeaderView: UIView {
     }
     
     @objc func btShowStatusPresed() {
-        print(statusTextField.text ?? "Empty")
+        guard statusTextField.text != "" else {
+            statusTextField.layer.borderColor = UIColor.red.cgColor
+            setStatusFailed()
+            return
+        }
+        statusTextField.layer.borderColor = UIColor.lightGray.cgColor
         statusLabel.text = statusTextField.text ?? ""
+    }
+    private func setStatusFailed(){
+        let animatorRight = UIViewPropertyAnimator(duration: 0.2, curve: .linear) {
+            self.statusTextField.center.x += 10
+        }
+        let animatorLeft = UIViewPropertyAnimator(duration: 0.2, curve: .linear) {
+            self.statusTextField.center.x -= 20
+        }
+        let animatorCanter = UIViewPropertyAnimator(duration: 0.2, curve: .linear) {
+            self.statusTextField.center.x += 10
+        }
+        animatorRight.addCompletion{_ in
+            animatorLeft.startAnimation(afterDelay: 0.0)
+        }
+        animatorLeft.addCompletion{_ in
+            animatorCanter.startAnimation(afterDelay: 0.0)
+        }
+        animatorRight.startAnimation(afterDelay: 0.0)
+        
     }
 }
