@@ -52,8 +52,6 @@ class ProfileViewController: UIViewController{
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    
-    
     // Напоминалкв чтобы не забывть функцию
     // override func viewWillLayoutSubviews() {
     //        super.viewWillLayoutSubviews()
@@ -139,7 +137,6 @@ class ProfileViewController: UIViewController{
     
     func creatProfileHeaderView(){
         profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        //   profileHeaderView.backgroundColor = .darkGray
         view.addSubview(profileHeaderView)
     }
     
@@ -194,8 +191,6 @@ extension ProfileViewController: UITableViewDataSource , UITableViewDelegate {
             return nil
         }
     }
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
