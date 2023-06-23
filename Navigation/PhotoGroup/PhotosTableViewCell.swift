@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class PhotosTableViewCell: UITableViewCell {
+final class PhotosTableViewCell: UIView {
+    
+    var callBackTapView: (() -> Void)?
     
     let photoGallery = PhotoStruct.createLocalGallery()
     let cellView: UIView = {
@@ -48,11 +50,10 @@ final class PhotosTableViewCell: UITableViewCell {
     }()
     
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         layout()
     }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -61,22 +62,32 @@ final class PhotosTableViewCell: UITableViewCell {
     
     
     func layout(){
-        [cellView].forEach {contentView.addSubview($0) }
-        contentView.backgroundColor = .white
+        [cellView].forEach {self.addSubview($0) }
+        self.backgroundColor = .white
         [photosLabel, collectionView, arrowImg].forEach {cellView.addSubview($0) }
         setConstraints()
+        setupGesture()
     }
     func getCellH() -> CGFloat {
-        return contentView.bounds.height
+        return self.bounds.height
+    }
+    
+    private func setupGesture(){
+        let tapViewGesture = UITapGestureRecognizer(target: self, action: #selector(tapView))
+        self.addGestureRecognizer(tapViewGesture)
+    }
+    
+    @objc func tapView(){
+        callBackTapView?()
     }
     
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            cellView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            cellView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            cellView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            cellView.topAnchor.constraint(equalTo: self.topAnchor),
+            cellView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             
             photosLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 12),

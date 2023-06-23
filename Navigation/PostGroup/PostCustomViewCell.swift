@@ -41,7 +41,7 @@ final class PostCustomViewCell: UITableViewCell {
         let image = UIView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
-        image.backgroundColor = .black
+        image.backgroundColor = .systemBackground
         return image
     }()
     
@@ -108,6 +108,7 @@ final class PostCustomViewCell: UITableViewCell {
     
     private func layout() {
         [authorLabel, descriptionLabel, postImage, likesLabel, viewsLabel, liksView].forEach {contentView.addSubview($0) }
+        self.backgroundColor = .systemBackground
         setConstraints()
         setupGesture()
     }
@@ -125,7 +126,7 @@ final class PostCustomViewCell: UITableViewCell {
             postImage.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: indentLeftRight),
             postImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             postImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            postImage.heightAnchor.constraint(equalTo: postImage.widthAnchor),
+            postImage.heightAnchor.constraint(equalTo: postImage.widthAnchor, multiplier: 0.7),
             
             descriptionLabel.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: indentLeftRight),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: indentLeftRight),

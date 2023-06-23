@@ -26,7 +26,7 @@ final class ProfileHeaderView: UIView {
     let statusLabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
-        label.textColor = .gray
+        label.textColor = .darkGray
         label.text = "It's empty label"
         return label
     }()
@@ -77,6 +77,7 @@ final class ProfileHeaderView: UIView {
         let allSubView = [avatarImageView, fullNameLabel, setStatusButton, statusTextField, statusLabel]
         ([self] + allSubView).forEach() {$0.translatesAutoresizingMaskIntoConstraints = false}
         allSubView.forEach() {self.addSubview($0)}
+        self.backgroundColor = .systemGray5
     }
     
     private func addConstraints(){
